@@ -39,7 +39,6 @@
 #include <cstdio>
 #include <list>
 
-
 using namespace std;
 
 /*
@@ -86,8 +85,7 @@ using namespace std;
         string freitag3;
         string freitag4;
         string textN;
-          
-        
+                 
         
 // Klasse Tage
 class Tage {
@@ -162,9 +160,13 @@ class Tage {
             cout << "Pfad: " << pfad0 << endl;
             fstream Datenschreiber(pfad0.c_str(),fstream::in | fstream::out | fstream::app);
             Datenschreiber << samstag0;
+            Datenschreiber << Datum_Samstag;
             Datenschreiber << samstag1;
+            Datenschreiber << Zeit_Samstag;
             Datenschreiber << samstag2;
+            Datenschreiber << Ort_Samstag;
             Datenschreiber << samstag3;
+            Datenschreiber << Zusatz_Samstag;
             Datenschreiber << samstag4;
             Datenschreiber.close();
         }
@@ -548,78 +550,69 @@ public:
         pfad0 = std::string(globalpfad0) + benutzer;
         // Pfad verketten
         pfad0 = std::string(pfad0) + "/termine.html";
-        
 
-        cout << "" << endl;
+        system(("sudo chmod 777 " + pfad0).c_str());                   
 
-                    system(("sudo chmod 777 " + pfad0).c_str());                   
-                                                           
-                     char word[20];  // Nutzereingabe in Array speichern
-                     int array_size = 2048; // Größe des Arrays festlegen
-                     char * array = new char[array_size]; // Arraygröße von 2kb einstellen
-                     int position = 0; // benutzt um Zeichen im Array zu füllen 
-  
-                     getchar();
-                     cout << "Welchen Eintrag Wollen Sie löschen? : ";
-                     cin.getline(word,19); // Worteingabe für die Suche
-                     int word_size = 0;
-                     // Länge der Nutzereingabe berechnen
-                     for(int i = 0; word[i] != '\0'; i++) {
-                        word_size++;
-                     }
+         char word[20];  // Nutzereingabe in Array speichern
+         int array_size = 2048; // Größe des Arrays festlegen
+         char * array = new char[array_size]; // Arraygröße von 2kb einstellen
+         int position = 0; // benutzt um Zeichen im Array zu füllen 
+
+         getchar();
+         cout << "Welchen Eintrag Wollen Sie löschen? : ";
+         cin.getline(word,19); // Worteingabe für die Suche
+         int word_size = 0;
+         // Länge der Nutzereingabe berechnen
+         for(int i = 0; word[i] != '\0'; i++) {
+            word_size++;
+         }
+
+         ifstream fin(pfad0.c_str()); // Input Stream für die Datei öffnen
+         // Überprüfen ob die Datei geöffnet werden konnte
+         if(fin.is_open()) {
+         // Datei erfolgreich geöffnet
+         // Schleife bis zum EOF
+            while(!fin.eof() && position < array_size) {
+                fin.get(array[position]); // lese ein Zeichen der Datei in ein Array
+                position++;
+            }
+            array[position-1] = '\n'; // setze Zeichen Array um Zeichen zu löschen
+
+            // Schleife sucht nach dem jeweiligen Wort im Array
+            string arstr(array);
+            size_t wpos = arstr.find(word);
+            if (wpos != string::npos) {
+                size_t secNL = arstr.find('\n', wpos);
+                size_t firNL = arstr.rfind('\n', wpos);
+                if (secNL != string::npos && firNL != string::npos)
+                    arstr.erase(firNL, secNL - firNL);
+            }
+
+            fin.close();
+            ofstream fout(pfad0.c_str());
+            fout << arstr.c_str();
+            cout<< "Eintrag wurde entfernt." << endl;
+         }
+
+         else {
+            cout << "Datei konnte nicht geöffnet werden." << endl;
+         }
                      
-                     ifstream fin(pfad0.c_str()); // Input Stream für die Datei öffnen
-                     // Überprüfen ob die Datei geöffnet werden konnte
-                     if(fin.is_open()) {
-                     // Datei erfolgreich geöffnet
-                     // Schleife bis zum EOF
-                        while(!fin.eof() && position < array_size) {
-                            fin.get(array[position]); // lese ein Zeichen der Datei in ein Array
-                            position++;
-                        }
-                        array[position-1] = '\n'; // setze Zeichen Array um Zeichen zu löschen
-
-                        // Schleife sucht nach dem jeweiligen Wort im Array
-                        for(int i = 0; array[i] != '\0'; i++) {
-                            for(int j = 0; word[j] != '\0' && j < 20 ; j++) {
-                                if(array[i] != word[j]) {
-                                    break;
-                                }
-                                else {
-                                    i++;
-                                    if(word[j+1] == '\0') {
-                                        // Schleife löscht das jeweilige Wort im Array
-                                        for(int k = (i-word_size); array[k] != '\0'; k++) {
-                                            array[k] = array[k+word_size];
-                                        }
-                                        i = i - (word_size+1); // Array Elemente werden nach links verschoben nachdem ein Wort entfernt wurde
-                                    }
-                                }
-                            }
-                        }
-                        fin.close();
-                        ofstream fout(pfad0.c_str());
-                        for(int i = 0; array[i] != '\0'; i++) {
-                            fout << array[i];
-                        }
-                        cout << "Eintrag wurde entfernt." << endl;
-                     }
-                     else {
-                        cout << "Datei konnte nicht geöffnet werden." << endl;
-                     }
-
-                     
-        }   
+    }   
     
         
     // Void ServerStatus in Klasse InterfaceActions
     void ServerStatus() {
-    
+        cout << "\033[2J\033[1;1H";
+        // Apache Status
+        system("sudo systemctl status httpd");
     }
 
     // Void RestartServer in Klasse InterfaceActions
     void RestartServer() {
-    
+        cout << "\033[2J\033[1;1H";
+        // Apache Server neustarten
+        system("sudo systemctl restart httpd");
     }
 
     // Void DisplayIP in Klasse InterfaceActions
