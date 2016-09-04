@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">SRTSM1-APP</string>
+    <string name="app_name">SRTSM1</string>
+    <string name="reload">Neu laden</string>
+    <string name="prompt_email">SRTSM1 Benutzername</string>
+    <string name="prompt_password">Passwort</string>
+    <string name="action_sign_in">Anmelden</string>
+    <string name="action_sign_in_short">Anmelden</string>
+    <string name="error_invalid_email">Dieser Name ist uns nicht bekannt</string>
+    <string name="error_invalid_password">Ihr Passwort ist zu kurz</string>
+    <string name="error_incorrect_password">Falsches Passwort!</string>
+    <string name="error_field_required">Dieses Feld muss ausgefüllt sein</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
 </resources>
