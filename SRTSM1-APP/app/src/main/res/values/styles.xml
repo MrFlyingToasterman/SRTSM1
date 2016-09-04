@@ -14,6 +14,8 @@
         <item name="android:textColorSecondaryInverse">#ffffffff</item>
         <item name="android:textColorTertiaryInverse">#ffffffff</item>
         <item name="android:textColorHint">#ffffffff</item>
+        <item name="android:itemBackground">#424242</item>
+        <item name="android:colorBackground">#424242</item>
     </style>
 
 </resources>

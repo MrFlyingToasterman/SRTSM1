@@ -2273,6 +2273,7 @@ containing a value of this type.
         public static final int notification_template_icon_bg=0x7f02004d;
     }
     public static final class id {
+        public static final int about=0x7f0c008a;
         public static final int action0=0x7f0c007d;
         public static final int action_bar=0x7f0c005a;
         public static final int action_bar_activity_content=0x7f0c0000;
@@ -2473,6 +2474,9 @@ containing a value of this type.
         public static final int select_dialog_multichoice_material=0x7f040030;
         public static final int select_dialog_singlechoice_material=0x7f040031;
         public static final int support_simple_spinner_dropdown_item=0x7f040032;
+    }
+    public static final class menu {
+        public static final int menu=0x7f0d0000;
     }
     public static final class mipmap {
         public static final int ic_launcher=0x7f030000;

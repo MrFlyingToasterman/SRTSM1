@@ -574,6 +574,7 @@ int drawable abc_textfield_search_material 0x7f02004a
 int drawable design_fab_background 0x7f02004b
 int drawable design_snackbar_background 0x7f02004c
 int drawable notification_template_icon_bg 0x7f02004d
+int id about 0x7f0c008a
 int id action0 0x7f0c007d
 int id action_bar 0x7f0c005a
 int id action_bar_activity_content 0x7f0c0000
@@ -770,6 +771,7 @@ int layout select_dialog_item_material 0x7f04002f
 int layout select_dialog_multichoice_material 0x7f040030
 int layout select_dialog_singlechoice_material 0x7f040031
 int layout support_simple_spinner_dropdown_item 0x7f040032
+int menu menu 0x7f0d0000
 int mipmap ic_launcher 0x7f030000
 int string abc_action_bar_home_description 0x7f060000
 int string abc_action_bar_home_description_format 0x7f060001
